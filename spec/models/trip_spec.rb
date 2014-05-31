@@ -7,7 +7,7 @@ describe Trip, :type => :model do
     it { should validate_presence_of(:end_date) }
 
     it 'validates end date to be greater than start date' do
-      invalid_trip = FactoryGirl.build(:trip, start_date: '2014-05-28', end_date: '2014-05-27')
+      invalid_trip = FactoryGirl.build(:trip, start_date: 2.days.from_now, end_date: 1.day.from_now)
       invalid_trip.valid?
       expect(invalid_trip.errors).to include(:start_date)
     end
@@ -17,6 +17,12 @@ describe Trip, :type => :model do
       invalid_trip = FactoryGirl.build(:trip)
       invalid_trip.valid?
       expect(invalid_trip.errors).to include(:base)
+    end
+
+    it 'validates start_date is not a date in the past' do
+      invalid_trip = FactoryGirl.build(:trip, start_date: 1.day.ago)
+      invalid_trip.valid?
+      expect(invalid_trip.errors).to include(:start_date)
     end
   end
 end

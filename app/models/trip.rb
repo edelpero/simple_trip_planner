@@ -4,6 +4,7 @@ class Trip < ActiveRecord::Base
   validates :destination, :start_date, :end_date, presence: true
   validate  :end_date_greater_than_start_date
   validate  :trip_doesnt_overlap_with_other_trip
+  validate  :start_date_is_not_a_past_date
 
   scope :upcoming,  -> { where('start_date > ?', Date.current) }
   scope :current,   -> { where('start_date <= ? AND end_date >= ?', Date.current, Date.current) }
@@ -32,6 +33,14 @@ class Trip < ActiveRecord::Base
         if results > 0
           errors.add(:base, "This trip overlaps with an existing one") and return
         end
+      end
+    end
+
+    def start_date_is_not_a_past_date
+      return unless start_date
+
+      if Date.current > start_date
+        errors.add(:start_date, "can't be a date in the past")
       end
     end
 end
