@@ -7,7 +7,7 @@ class Trip < ActiveRecord::Base
   validate  :start_date_is_not_a_past_date
 
   scope :upcoming,  -> { where('start_date > ?', Date.current) }
-  scope :current,   -> { where('start_date <= ? AND end_date >= ?', Date.current, Date.current) }
+  scope :current,   -> { between(Date.current, Date.current) }
   scope :past,      -> { where('end_date < ?', Date.current) }
   scope :between,   -> (start_date, end_date) { where('start_date <= ? AND end_date >= ?', start_date, end_date) }
   scope :for_user,  -> (user) { where(user: user) }
