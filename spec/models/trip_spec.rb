@@ -51,5 +51,25 @@ describe Trip, :type => :model do
         expect(results).to include(trip)
       end
     end
+
+    describe '.for_user' do
+      before do
+        @first_trip   = FactoryGirl.create(:trip)
+        @user         = @first_trip.user
+        @second_trip  = FactoryGirl.create(:trip, user: @user, start_date: 2.weeks.from_now, end_date: 3.weeks.from_now)
+        @third_trip   = FactoryGirl.create(:trip)
+        @another_user = @third_trip.user
+      end
+
+      it 'returns trips from specific user' do
+        results = Trip.for_user(@user)
+        expect(results).to include(@first_trip, @second_trip)
+      end
+
+      it 'does not returns trip from another user' do
+        results = Trip.for_user(@user)
+        expect(results).not_to include(@third_trip)
+      end
+    end
   end
 end

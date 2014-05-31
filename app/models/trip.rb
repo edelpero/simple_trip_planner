@@ -10,6 +10,7 @@ class Trip < ActiveRecord::Base
   scope :current,   -> { where('start_date <= ? AND end_date >= ?', Date.current, Date.current) }
   scope :past,      -> { where('end_date < ?', Date.current) }
   scope :between,   -> (start_date, end_date) { where('start_date <= ? AND end_date >= ?', start_date, end_date) }
+  scope :for_user,  -> (user) { where(user: user) }
 
   private
 
@@ -29,7 +30,7 @@ class Trip < ActiveRecord::Base
       dates.each do |date|
         results  = 0
 
-        results += Trip.between(date, date).count
+        results += Trip.for_user(user).between(date, date).count
         if results > 0
           errors.add(:base, "This trip overlaps with an existing one") and return
         end
