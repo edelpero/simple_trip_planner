@@ -42,5 +42,14 @@ describe Trip, :type => :model do
         expect(results).to include(trip)
       end
     end
+
+    describe '.past' do
+      it 'returns past trips' do
+        trip = FactoryGirl.build(:trip, start_date: 1.month.ago, end_date: 2.weeks.ago)
+        trip.save(validate: false)
+        results = Trip.past
+        expect(results).to include(trip)
+      end
+    end
   end
 end
