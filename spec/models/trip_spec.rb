@@ -34,5 +34,13 @@ describe Trip, :type => :model do
         expect(results).to include(trip)
       end
     end
+
+    describe '.current' do
+      it 'returns the current trip' do
+        trip = FactoryGirl.create(:trip)
+        results = Trip.current
+        expect(results).to include(trip)
+      end
+    end
   end
 end
