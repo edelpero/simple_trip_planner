@@ -9,7 +9,7 @@ class Trip < ActiveRecord::Base
   scope :upcoming,  -> { where('start_date > ?', Date.current) }
   scope :current,   -> { where('start_date <= ? AND end_date >= ?', Date.current, Date.current) }
   scope :past,      -> { where('end_date < ?', Date.current) }
-  scope :between,   -> (start_date, end_date) { where('start_date < ? AND end_date > ?', start_date, end_date) }
+  scope :between,   -> (start_date, end_date) { where('start_date <= ? AND end_date >= ?', start_date, end_date) }
 
   private
 
