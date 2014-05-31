@@ -12,11 +12,31 @@ describe Trip, :type => :model do
       expect(invalid_trip.errors).to include(:start_date)
     end
 
-    it 'validates trip doesnt overlap with an existing trip' do
-      FactoryGirl.create(:trip)
-      invalid_trip = FactoryGirl.build(:trip)
-      invalid_trip.valid?
-      expect(invalid_trip.errors).to include(:base)
+    describe 'validates trip doesnt overlap with an existing trip from same user' do
+      before do
+        @trip = FactoryGirl.create(:trip)
+        @user = @trip.user
+      end
+
+      context 'with same user' do
+        it 'does not saves trip if dates overlaps' do
+          invalid_trip = FactoryGirl.build(:trip, user: @user)
+          invalid_trip.valid?
+          expect(invalid_trip.errors).to include(:base)
+        end
+
+        it 'saves trip if dates does not overlaps' do
+          valid_trip = FactoryGirl.build(:trip, user: @user, start_date: 2.weeks.from_now, end_date: 3.weeks.from_now)
+          expect(valid_trip.save).to eq(true)
+        end
+      end
+
+      context 'with another user' do
+        it 'saves the trip if dates overlaps with another users trip' do
+          valid_trip = FactoryGirl.build(:trip)
+          expect(valid_trip.save).to eq(true)
+        end
+      end
     end
 
     it 'validates start_date is not a date in the past' do
