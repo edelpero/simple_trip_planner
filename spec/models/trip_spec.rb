@@ -25,4 +25,14 @@ describe Trip, :type => :model do
       expect(invalid_trip.errors).to include(:start_date)
     end
   end
+
+  describe 'scopes' do
+    describe '.upcoming' do
+      it 'returns trips which have not started yet' do
+        trip = FactoryGirl.create(:trip, start_date: 1.day.from_now)
+        results = Trip.upcoming
+        expect(results).to include(trip)
+      end
+    end
+  end
 end
