@@ -11,5 +11,12 @@ describe Trip, :type => :model do
       invalid_trip.valid?
       expect(invalid_trip.errors).to include(:start_date)
     end
+
+    it 'validates trip doesnt overlap with an existing trip' do
+      FactoryGirl.create(:trip)
+      invalid_trip = FactoryGirl.build(:trip)
+      invalid_trip.valid?
+      expect(invalid_trip.errors).to include(:base)
+    end
   end
 end
