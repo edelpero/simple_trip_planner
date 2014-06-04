@@ -12,6 +12,7 @@ gem 'turbolinks'
 gem 'jbuilder',     '~> 2.0'
 gem 'sdoc',         '~> 0.4.0', group: :doc
 gem 'devise',       '~> 3.2.4'
+gem 'has_scope',    '~> 0.5.1'
 
 
 group :development do
@@ -20,6 +21,7 @@ group :development do
   gem 'better_errors'
   gem 'binding_of_caller'
   gem 'letter_opener'
+  gem 'pry-rails', '~> 0.3.2'
 end
 
 group :development, :test do
@@ -29,5 +31,6 @@ group :development, :test do
   gem 'dotenv-rails'
   gem 'database_cleaner'
   gem 'ffaker'
+  gem 'awesome_print'
 end
 
