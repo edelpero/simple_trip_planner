@@ -3,7 +3,7 @@ class Trip < ActiveRecord::Base
 
   validates :destination, :start_date, :end_date, presence: true
   validate  :end_date_greater_than_start_date
-  validate  :trip_doesnt_overlap_with_other_trip
+  validate  :trip_doesnt_overlap_scoped_to_user
   validate  :start_date_is_not_a_past_date
 
   scope :upcoming,  -> { where('start_date > ?', Date.current) }
@@ -22,7 +22,7 @@ class Trip < ActiveRecord::Base
       end
     end
 
-    def trip_doesnt_overlap_with_other_trip
+    def trip_doesnt_overlap_scoped_to_user
       return unless start_date && end_date
 
       start_range = start_date + 1.day
