@@ -1,6 +1,11 @@
 require 'spec_helper'
 
 describe Trip, :type => :model do
+
+  describe 'associations' do
+    it { should belong_to(:user) }
+  end
+
   describe 'validations' do
     it { should validate_presence_of(:destination) }
     it { should validate_presence_of(:start_date) }
@@ -68,6 +73,14 @@ describe Trip, :type => :model do
         trip = FactoryGirl.build(:trip, start_date: 1.month.ago, end_date: 2.weeks.ago)
         trip.save(validate: false)
         results = Trip.past
+        expect(results).to include(trip)
+      end
+    end
+
+    describe '.overlaping' do
+      it 'returns overlaping trips' do
+        trip = FactoryGirl.create(:trip, start_date: 3.days.from_now, end_date: 12.days.from_now)
+        results = Trip.overlaping(1.day.from_now, 6.days.from_now)
         expect(results).to include(trip)
       end
     end
