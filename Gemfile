@@ -14,6 +14,7 @@ gem 'sdoc',         '~> 0.4.0', group: :doc
 gem 'devise',       '~> 3.2.4'
 gem 'has_scope',    '~> 0.5.1'
 gem 'haml',         '~> 4.0.5'
+gem 'kaminari',     '~> 0.16.0'
 
 
 group :development do
