@@ -1,0 +1,9 @@
+= render partial: 'shared/navbar/navbar', locals: { navbar_element: :new_trip }
+.ui.three.column.grid
+  .three.wide.column
+  .ten.wide.column
+    = form_for(@trip, html: { class: 'ui error form segment' }) do |form|
+      %h3.ui.header New Trip
+      = render partial: 'form_fields', locals: { form: form, trip: @trip }
+      .field
+        = form.submit 'Create', class: 'ui green fluid small button'

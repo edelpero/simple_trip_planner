@@ -1,0 +1,25 @@
+.ui.three.column.page.grid
+  .column
+  .column
+    = form_for(resource, as: resource_name, url: registration_path(resource_name), html: { class: 'ui form segment'}) do |f|
+      %h3.ui.header Sign up
+      = devise_error_messages!
+      .field
+        = f.label :email
+        .ui.left.labeled.icon.input
+          = f.email_field :email, autofocus: true
+          %i.mail.outline.icon
+      .field
+        = f.label :password
+        .ui.left.labeled.icon.input
+          = f.password_field :password, autocomplete: "off"
+          %i.lock.icon
+      .field
+        = f.label :password_confirmation
+        .ui.left.labeled.icon.input
+          = f.password_field :password_confirmation, autocomplete: "off"
+          %i.lock.icon
+      .field
+        = f.submit 'Sign up', class: 'ui green fluid small button'
+      = render "devise/shared/links"
+  .column

@@ -56,11 +56,6 @@ describe TripsController, :type => :controller do
       get :index, upcoming: true
     end
 
-    it 'it retrivies all current trips from user' do
-      expect(@trips).to receive(:current)
-      get :index, current: true
-    end
-
     it 'it retrivies all past trips from user' do
       expect(@trips).to receive(:past)
       get :index, past: true

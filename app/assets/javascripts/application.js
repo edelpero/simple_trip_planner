@@ -14,3 +14,14 @@
 //= require jquery_ujs
 //= require turbolinks
 //= require_tree .
+
+$(document).on('ready page:load', function() {
+  $('input.datepicker').datepicker({
+    format: "dd-mm-yyyy"
+  });
+
+  $('form .submit').on('click', function(e) {
+    e.preventDefault();
+    $(this).parent().parent().parent().submit();
+  });
+})

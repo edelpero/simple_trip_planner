@@ -1,0 +1,26 @@
+= render partial: 'shared/navbar/navbar', locals: { navbar_element: :my_trips }
+.ui.three.column.page.grid
+  .three.wide.column
+  .ten.wide.column
+    .ui.piled.segment
+      %h2 Trip Details
+      %p
+        %b Destination:
+        = @trip.destination
+      %p
+        %b Start Date:
+        = @trip.start_date.strftime('%d-%m-%Y')
+      %p
+        %b End Date:
+        = @trip.end_date.strftime('%d-%m-%Y')
+      - if @trip.comment.present?
+        %p
+          %b Comments:
+          = @trip.comment
+      %p
+        %b Created At:
+        = @trip.created_at.strftime('%d-%m-%Y %H:%M')
+      %p
+        %b Updated At:
+        = @trip.updated_at.strftime('%d-%m-%Y %H:%M')
+  .three.wide.column

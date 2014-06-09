@@ -1,0 +1,15 @@
+.ui.three.column.page.grid
+  .column
+  .column
+    = form_for(resource, as: resource_name, url: password_path(resource_name), html: { method: :post, class: 'ui form segment' }) do |f|
+      %h3.ui.header Forgot your password?
+      = devise_error_messages!
+      .field
+        = f.label :email
+        .ui.left.labeled.icon.input
+          = f.email_field :email, autofocus: true
+          %i.mail.outline.icon
+      .field
+        = f.submit "Reset Password", class: 'ui green fluid small button'
+      = render "devise/shared/links"
+  .column

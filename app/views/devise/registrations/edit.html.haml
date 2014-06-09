@@ -1,0 +1,49 @@
+= render partial: 'shared/navbar/navbar', locals: { navbar_element: :edit_profile}
+.ui.grid
+  .two.wide.column
+  .six.wide.column
+    = form_for(resource, as: resource_name, url: registration_path(resource_name), html: { method: :put, class: 'ui error form segment' }) do |f|
+      %h3.ui.header Edit Profile
+      = devise_error_messages!
+      .field
+        = f.label :name
+        .ui.left.labeled.icon.input
+          = f.text_field :name, autofocus: true
+          %i.user.icon
+      .field
+        = f.label :username
+        .ui.left.labeled.icon.input
+          = f.text_field :username
+          %i.user.icon
+      .field
+        = f.label :email
+        .ui.left.labeled.icon.input
+          = f.email_field :email
+          %i.mail.outline.icon
+      - if devise_mapping.confirmable? && resource.pending_reconfirmation?
+        .field
+          Currently waiting confirmation for: #{resource.unconfirmed_email}
+      .field
+        = f.label :password
+        .ui.left.labeled.icon.input
+          = f.password_field :password, autocomplete: "off"
+          %i.lock.icon
+        %i (leave blank if you don't want to change it)
+      .field
+        = f.label :password_confirmation
+        .ui.left.labeled.icon.input
+          = f.password_field :password_confirmation, autocomplete: "off"
+          %i.lock.icon
+      .field
+        = f.label :current_password
+        .ui.left.labeled.icon.input
+          = f.password_field :current_password, autocomplete: "off"
+          %i.lock.icon
+        %i (we need your current password to confirm your changes)
+      .field
+        = f.submit "Update", class: 'ui green fluid small button'
+  .four.wide.column
+    .ui.form.segment
+      %h3 Cancel my account
+      %p
+        Unhappy? #{button_to "Cancel my account", registration_path(resource_name), data: { confirm: "Are you sure?" }, method: :delete, class: 'ui red fluid small button'}

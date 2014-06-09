@@ -1,0 +1,19 @@
+= resource_error_messages(trip)
+.ui.two.column.grid
+  .column
+    .field
+      = form.label :destination
+      .ui.left.labeled.icon.input
+        = form.text_field :destination, autofocus: true
+        %i.location.icon
+    .date.field
+      = form.label :start_date
+      = form.text_field :start_date, placeholder: 'dd-mm-yyyy', class: 'datepicker'
+    .date.field
+      = form.label :end_date
+      = form.text_field :end_date, placeholder: 'dd-mm-yyyy', class: 'datepicker'
+  .column
+    .field
+      = form.label :comment
+      .ui.left.labeled.icon.input
+        = form.text_area :comment

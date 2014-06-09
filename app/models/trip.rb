@@ -3,14 +3,15 @@ class Trip < ActiveRecord::Base
 
   validates :destination, :start_date, :end_date, presence: true
   validate  :end_date_greater_than_start_date
-  validate  :trip_doesnt_overlap_scoped_to_user
-  validate  :start_date_is_not_a_past_date
+  validate  :trip_doesnt_overlap_scoped_to_user, on: :create
+  validate  :start_date_is_not_a_past_date,      on: :create
 
   scope :upcoming,  -> { where('start_date > ?', Date.current) }
   scope :current,   -> { where('start_date <= ? AND end_date >= ?', Date.current, Date.current) }
   scope :past,      -> { where('end_date < ?', Date.current) }
   scope :overlaping, -> (start_date, end_date) { where('(start_date BETWEEN ? AND ?) OR (end_date BETWEEN ? AND ?)', start_date, end_date, start_date, end_date) }
   scope :for_user,  -> (user) { where(user: user) }
+  scope :destination, -> (destination) { where('trips.destination LIKE ?', destination) }
 
   private
 

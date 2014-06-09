@@ -4,5 +4,5 @@ class User < ActiveRecord::Base
 
   has_many :trips
 
-  validates :username, :name, presence: true
+  validates :username, uniqueness: true
 end

@@ -1,15 +1,10 @@
 require 'spec_helper'
 
-# Specs in this file have access to a helper object that includes
-# the TripsHelper. For example:
-#
-# describe TripsHelper do
-#   describe "string concat" do
-#     it "concats two strings with spaces" do
-#       expect(helper.concat_strings("this","that")).to eq("this that")
-#     end
-#   end
-# end
 describe TripsHelper, :type => :helper do
-  pending "add some examples to (or delete) #{__FILE__}"
+  describe '#days_for_trip_to_start' do
+    it 'returns remaining fays for trip to start' do
+      trip = FactoryGirl.create(:trip, start_date: 2.day.from_now)
+      expect(helper.days_for_trip_to_start(trip)).to eq('2 days')
+    end
+  end
 end

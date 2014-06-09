@@ -1,0 +1,14 @@
+%div.ui.secondary.pointing.menu
+  = link_to trips_path, class: "item #{navbar_active?(navbar_element, :my_trips)}" do
+    %i.circular.plane.icon
+    My Trips
+  = link_to new_trip_path, class: "item #{navbar_active?(navbar_element, :new_trip)}" do
+    %i.circular.add.icon
+    Add Trip
+  %div.right.menu
+    = link_to edit_user_registration_path, class: "item #{navbar_active?(navbar_element, :edit_profile)}" do
+      %i.circular.wrench.icon
+      Account Settings
+    = link_to destroy_user_session_path, method: :delete, class: 'ui item' do
+      %i.circular.sign.out.icon
+      Logout

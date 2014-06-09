@@ -2,9 +2,9 @@ class TripsController < ApplicationController
   before_action :find_trip, only: [:show, :edit, :update, :destroy]
 
   has_scope :upcoming, type: :boolean
-  has_scope :current,  type: :boolean
   has_scope :past,     type: :boolean
   has_scope :between, using: [:started_at, :ended_at], type: :hash
+  has_scope :destination
 
   def index
     @trips = apply_scopes(current_user.trips)
