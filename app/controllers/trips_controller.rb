@@ -7,7 +7,7 @@ class TripsController < ApplicationController
   has_scope :destination
 
   def index
-    @trips = apply_scopes(current_user.trips)
+    @trips = apply_scopes(current_user.trips).page(params[:page])
   end
 
   def show

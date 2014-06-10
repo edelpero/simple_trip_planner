@@ -35,6 +35,7 @@
                 Edit
               = link_to trip_path(trip), class: 'ui red tiny button', method: :delete do
                 Delete
+    = paginate @trips
 
   .four.wide.column
     = form_tag trips_path, class: 'ui vertical menu', method: :get do
