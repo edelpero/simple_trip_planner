@@ -7,7 +7,7 @@ class TripsController < ApplicationController
   has_scope :destination
 
   def index
-    @trips = apply_scopes(current_user.trips).page(params[:page])
+    @trips = apply_scopes(current_user.trips.order(:start_date)).page(params[:page])
   end
 
   def show
@@ -44,6 +44,14 @@ class TripsController < ApplicationController
     else
       redirect_to @trip, alert: 'Something went wrong, please try again.'
     end
+  end
+
+  def next_month
+    next_month_beginning = 1.month.from_now.beginning_of_month.to_date
+    next_month_ending    = 1.month.from_now.end_of_month.to_date
+
+    @trips = current_user.trips.overlaping(next_month_beginning, next_month_ending).
+      order(:start_date).page(params[:page])
   end
 
   protected

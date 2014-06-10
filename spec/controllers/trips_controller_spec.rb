@@ -44,6 +44,8 @@ describe TripsController, :type => :controller do
     before do
       @trips = double(Trip)
       allow(@user).to receive(:trips).and_return(@trips)
+      allow(@trips).to receive(:order).and_return(@trips)
+      allow(@trips).to receive(:page).and_return(@trips)
     end
 
     it "retrivies all user's trip" do
@@ -52,12 +54,12 @@ describe TripsController, :type => :controller do
     end
 
     it 'it retrivies all upcoming trips from user' do
-      expect(@trips).to receive(:upcoming)
+      expect(@trips).to receive(:upcoming).and_return(@trips)
       get :index, upcoming: true
     end
 
     it 'it retrivies all past trips from user' do
-      expect(@trips).to receive(:past)
+      expect(@trips).to receive(:past).and_return(@trips)
       get :index, past: true
     end
 
@@ -161,6 +163,26 @@ describe TripsController, :type => :controller do
         delete :destroy, id: @trip.id
         expect(response).to redirect_to(trip_path(@trip))
       end
+    end
+  end
+
+  describe 'GET#next_month' do
+    before do
+      @trips = double(Trip)
+      allow(@user).to receive(:trips).and_return(@trips)
+      allow(@trips).to receive(:overlaping).and_return(@trips)
+      allow(@trips).to receive(:order).and_return(@trips)
+      allow(@trips).to receive(:page).and_return(@trips)
+    end
+
+    it "retrivies all user's trip" do
+      get :next_month
+      expect(assigns(:trips)).to eq(@trips)
+    end
+
+    it 'renders trips/index template' do
+      get :next_month
+      expect(response).to render_template(:next_month)
     end
   end
 
