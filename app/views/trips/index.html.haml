@@ -1,42 +1,7 @@
 = render partial: 'shared/navbar/navbar', locals: { navbar_element: :my_trips}
 .ui.two.column.page.grid
   .twelve.wide.column
-    %table.ui.table.segment
-      %thead
-        %tr
-          %th
-            %i.location.icon
-            Destination
-          %th
-            %i.calendar.icon
-            Start Date
-          %th
-            %i.calendar.icon
-            End Date
-          %th
-            %i.time.icon
-            Days to Start Trip
-          %th
-            %i.browser.icon
-            Actions
-      %tbody
-        - @trips.each do |trip|
-          %tr
-            %td
-              = trip.destination
-            %td
-              = trip.start_date
-            %td
-              = trip.end_date
-            %td
-              = days_for_trip_to_start(trip)
-            %td
-              = link_to edit_trip_path(trip), class: 'ui blue tiny button' do
-                Edit
-              = link_to trip_path(trip), class: 'ui red tiny button', method: :delete do
-                Delete
-    = paginate @trips
-
+    = render partial: 'list', locals: { trips: @trips }
   .four.wide.column
     = form_tag trips_path, class: 'ui vertical menu', method: :get do
       .header.item
