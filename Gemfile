@@ -15,6 +15,7 @@ gem 'devise',       '~> 3.2.4'
 gem 'has_scope',    '~> 0.5.1'
 gem 'haml',         '~> 4.0.5'
 gem 'kaminari',     '~> 0.16.0'
+gem 'ffaker'
 
 
 group :development do
@@ -32,7 +33,6 @@ group :development, :test do
   gem 'factory_girl_rails'
   gem 'dotenv-rails'
   gem 'database_cleaner'
-  gem 'ffaker'
   gem 'awesome_print'
 end
 
