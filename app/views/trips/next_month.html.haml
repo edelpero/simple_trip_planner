@@ -1,0 +1,4 @@
+= render partial: 'shared/navbar/navbar', locals: { navbar_element: :next_month_trips}
+.ui.two.column.page.grid
+  .fourteen.wide.column
+    = render partial: 'list', locals: { trips: @trips }
