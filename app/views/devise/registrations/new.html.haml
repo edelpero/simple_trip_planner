@@ -1,6 +1,9 @@
 .ui.three.column.page.grid
   .column
   .column
+    .ui.huge.header.title
+      %span Simple
+      TripPlanner
     = form_for(resource, as: resource_name, url: registration_path(resource_name), html: { class: 'ui form segment'}) do |f|
       %h3.ui.header Sign up
       = devise_error_messages!

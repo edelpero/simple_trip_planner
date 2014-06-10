@@ -19,3 +19,11 @@
 * {
   font-family: 'Open Sans', sans-serif;
 }
+
+.title {
+  text-align: center;
+}
+
+.title .content span {
+  font-weight: 100;
+}

@@ -1,6 +1,9 @@
 .ui.three.column.page.grid
   .column
   .column
+    .ui.huge.header.title
+      %span Simple
+      TripPlanner
     = form_for(resource, as: resource_name, url: password_path(resource_name), html: { method: :post, class: 'ui form segment' }) do |f|
       %h3.ui.header Forgot your password?
       = devise_error_messages!
