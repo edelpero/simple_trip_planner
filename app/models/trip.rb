@@ -11,7 +11,7 @@ class Trip < ActiveRecord::Base
   scope :past,      -> { where('end_date < ?', Date.current) }
   scope :overlaping, -> (start_date, end_date) { where('(start_date BETWEEN ? AND ?) OR (end_date BETWEEN ? AND ?)', start_date, end_date, start_date, end_date) }
   scope :for_user,  -> (user) { where(user: user) }
-  scope :destination, -> (destination) { where('trips.destination LIKE ?', destination) }
+  scope :destination, -> (destination) { where('trips.destination iLIKE ?', "%#{destination}%") }
 
   private
 
